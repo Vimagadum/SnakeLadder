@@ -29,12 +29,12 @@ namespace SnakeFolder
             else if (ranOption == 1)
             {
                 Console.WriteLine("Ladder");
-                FirstPlayerPosition += FirstPlayerPosition + DiceValue;
+                FirstPlayerPosition = FirstPlayerPosition + DiceValue;
             }
             else
             {
                 Console.WriteLine("Snake");
-                FirstPlayerPosition -= FirstPlayerPosition + DiceValue;
+                FirstPlayerPosition = FirstPlayerPosition + DiceValue;
             }
         }
     }
