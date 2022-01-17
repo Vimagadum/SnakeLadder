@@ -7,58 +7,73 @@ using System.Threading.Tasks;
 namespace SnakeFolder
 {
     public class Snake_Ladder
-    {
-        int FirstPlayerPosition = 0;
-        int MAX_POSITION = 100;
-
+    {   
+        //To get random value
         Random random = new Random();
+        //to store the current position 
+        int curposition = 0;
+        const int MAX_POSITION = 100;
+        int diceValue;
         int ranOption;
+        //to store dicecount 
+        int DiceCount;
+
+
         public void game()
         {
-            //First player starting from position 0
-            FirstPlayerPosition = 0;
-            
-            //Creating while loop to reach the maximum value
-            while (FirstPlayerPosition <= MAX_POSITION)
+
+            //Writing loop to repeat a method till the position reaches max position
+            while (curposition <= MAX_POSITION)
             {
-                //Taking random value of Dice from 1-6
-                int DiceValue = random.Next(1, 7);
-
-                ranOption = random.Next(0, 3);
-
-                if (ranOption == 0)
+                diceValue = random.Next(1, 7);
+                if (curposition >= 0 && curposition < 100)
                 {
-                    Console.WriteLine("no play");
-                    FirstPlayerPosition += FirstPlayerPosition;
-                }
-                else if (ranOption == 1)
-                {
-                    Console.WriteLine("Ladder");
-                    FirstPlayerPosition = FirstPlayerPosition + DiceValue;
+                    ranOption = random.Next(0, 3);
 
-                    if (FirstPlayerPosition + DiceValue <= 100)
+                    if (ranOption == 0)
                     {
-                        FirstPlayerPosition = FirstPlayerPosition + DiceValue;
-                        
-                        Console.WriteLine("Ladder");
-
+                        Console.WriteLine("no play");
+                        DiceCount++;
                     }
 
-                    else
+                    else if (ranOption == 1)
                     {
-                        Console.WriteLine(" ramin in same position");
+                        if (curposition + diceValue <= 100)
+                        {
+                            curposition = curposition + diceValue;
+                            Console.WriteLine("Ladder");
+                            DiceCount++;
+                        }
+
+                        else
+                        {
+                            Console.WriteLine(" ramin in same position");
+                            DiceCount++;
+                        }
                     }
+
+                    else if (ranOption == 2)
+                    {
+                        if (curposition - diceValue <= 0)
+                        {
+                            curposition = 0;
+                            DiceCount++;
+                        }
+                        else
+                        {
+                            curposition -= diceValue;
+                            Console.WriteLine("Snake");
+                            DiceCount++;
+                        }
+                    }
+                    Console.WriteLine(curposition);
+                    Console.WriteLine(DiceCount);
+                    Console.WriteLine();
                 }
-                else if (ranOption == 2)
-                {
-                    Console.WriteLine("Snake");
-                    FirstPlayerPosition = FirstPlayerPosition - DiceValue;
-                }
-                else
-                {
-                    Console.WriteLine("Not valid move");
-                }
+
+
             }
         }
+
     }
 }
