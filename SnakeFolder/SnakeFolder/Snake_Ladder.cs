@@ -35,6 +35,19 @@ namespace SnakeFolder
                 {
                     Console.WriteLine("Ladder");
                     FirstPlayerPosition = FirstPlayerPosition + DiceValue;
+
+                    if (FirstPlayerPosition + DiceValue <= 100)
+                    {
+                        FirstPlayerPosition = FirstPlayerPosition + DiceValue;
+                        
+                        Console.WriteLine("Ladder");
+
+                    }
+
+                    else
+                    {
+                        Console.WriteLine(" ramin in same position");
+                    }
                 }
                 else if (ranOption == 2)
                 {
