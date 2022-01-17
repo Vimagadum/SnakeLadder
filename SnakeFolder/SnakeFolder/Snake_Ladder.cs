@@ -7,69 +7,194 @@ using System.Threading.Tasks;
 namespace SnakeFolder
 {
     public class Snake_Ladder
-    {   
-        //To get random value
+    {
+        //taking random number
         Random random = new Random();
-        //to store the current position 
-        int curposition = 0;
+
+        int firstPlayerPosition = 0;
+        int secondPlayerPosition = 0;
+
         const int MAX_POSITION = 100;
         int diceValue;
         int ranOption;
-        //to store dicecount 
-        int DiceCount;
+        int playerOnediceCount;
+        int playerTwodiceCount;
 
 
         public void game()
         {
-
-            //Writing loop to repeat a method till the position reaches max position
-            while (curposition <= MAX_POSITION)
+            //checking value is in the middle of 0 and 100
+            while (firstPlayerPosition <= MAX_POSITION && secondPlayerPosition <= MAX_POSITION)
             {
-                diceValue = random.Next(1, 7);
-                if (curposition >= 0 && curposition < 100)
+                // selecting that which player have to play 
+                int checkPlayer = random.Next(0, 2);
+                if (checkPlayer == 0)
                 {
-                    ranOption = random.Next(0, 3);
-
-                    if (ranOption == 0)
+                    diceValue = random.Next(1, 7);
+                    if (firstPlayerPosition >= 0 && firstPlayerPosition < 100)
                     {
-                        Console.WriteLine("no play");
-                        DiceCount++;
-                    }
+                        ranOption = random.Next(0, 3);
 
-                    else if (ranOption == 1)
-                    {
-                        if (curposition + diceValue <= 100)
+                        if (ranOption == 0)
                         {
-                            curposition = curposition + diceValue;
-                            Console.WriteLine("Ladder");
-                            DiceCount++;
+                            Console.WriteLine("no play");
                         }
 
-                        else
+                        else if (ranOption == 1)
                         {
-                            Console.WriteLine(" ramin in same position");
-                            DiceCount++;
-                        }
-                    }
+                            if (firstPlayerPosition + diceValue <= 100)
+                            {
+                                firstPlayerPosition = firstPlayerPosition + diceValue;
+                                playerOnediceCount++;
+                                Console.WriteLine("u got a chnace again to play");
+                                ranOption = random.Next(0, 3);
 
-                    else if (ranOption == 2)
-                    {
-                        if (curposition - diceValue <= 0)
-                        {
-                            curposition = 0;
-                            DiceCount++;
+                                if (ranOption == 0)
+                                {
+                                    Console.WriteLine("no play");
+                                }
+
+                                else if (ranOption == 1)
+                                {
+                                    if (firstPlayerPosition + diceValue <= 100)
+                                    {
+                                        firstPlayerPosition = firstPlayerPosition + diceValue;
+                                        playerOnediceCount++;
+                                        Console.WriteLine("Ladder");
+
+                                    }
+
+                                    else
+                                    {
+                                        Console.WriteLine(" ramin in same position");
+                                    }
+                                }
+
+                                else if (ranOption == 2)
+                                {
+                                    if (firstPlayerPosition - diceValue <= 0)
+                                    {
+                                        firstPlayerPosition = 0;
+                                        playerOnediceCount++;
+                                    }
+                                    else
+                                    {
+                                        firstPlayerPosition -= diceValue;
+                                        playerOnediceCount++;
+                                        Console.WriteLine("Snake");
+                                    }
+                                }
+
+                            }
+
+                            else
+                            {
+                                Console.WriteLine(" remain in same position");
+                            }
                         }
-                        else
+
+                        else if (ranOption == 2)
                         {
-                            curposition -= diceValue;
-                            Console.WriteLine("Snake");
-                            DiceCount++;
+                            if (firstPlayerPosition - diceValue <= 0)
+                            {
+                                firstPlayerPosition = 0;
+                                playerOnediceCount++;
+                            }
+                            else
+                            {
+                                firstPlayerPosition -= diceValue;
+                                playerOnediceCount++;
+                                Console.WriteLine("Snake");
+                            }
                         }
+                        Console.WriteLine(firstPlayerPosition);
+                        Console.WriteLine(playerOnediceCount);
                     }
-                    Console.WriteLine(curposition);
-                    Console.WriteLine(DiceCount);
-                    Console.WriteLine();
                 }
+                else if (checkPlayer == 1)
+                {
+                    diceValue = random.Next(1, 7);
+                    if (secondPlayerPosition >= 0 && secondPlayerPosition < 100)
+                    {
+                        ranOption = random.Next(0, 3);
+
+                        if (ranOption == 0)
+                        {
+                            Console.WriteLine("no play");
+                        }
+
+                        else if (ranOption == 1)
+                        {
+                            if (secondPlayerPosition + diceValue <= 100)
+                            {
+                                secondPlayerPosition = secondPlayerPosition + diceValue;
+                                playerTwodiceCount++;
+                                Console.WriteLine("u got a chnace again to play");
+                                ranOption = random.Next(0, 3);
+
+                                if (ranOption == 0)
+                                {
+                                    Console.WriteLine("no play");
+                                }
+
+                                else if (ranOption == 1)
+                                {
+                                    if (secondPlayerPosition + diceValue <= 100)
+                                    {
+                                        secondPlayerPosition = secondPlayerPosition + diceValue;
+                                        playerTwodiceCount++;
+                                        Console.WriteLine("Ladder");
+
+                                    }
+
+                                    else
+                                    {
+                                        Console.WriteLine(" remain in same position");
+                                    }
+                                }
+
+                                else if (ranOption == 2)
+                                {
+                                    if (secondPlayerPosition - diceValue <= 0)
+                                    {
+                                        secondPlayerPosition = 0;
+                                        playerTwodiceCount++;
+                                    }
+                                    else
+                                    {
+                                        secondPlayerPosition -= diceValue;
+                                        playerTwodiceCount++;
+                                        Console.WriteLine("Snake");
+                                    }
+                                }
+
+                            }
+
+                            else
+                            {
+                                Console.WriteLine(" remain in same position");
+                            }
+                        }
+
+                        else if (ranOption == 2)
+                        {
+                            if (secondPlayerPosition - diceValue <= 0)
+                            {
+                                secondPlayerPosition = 0;
+                                playerTwodiceCount++;
+                            }
+                            else
+                            {
+                                secondPlayerPosition -= diceValue;
+                                playerTwodiceCount++;
+                                Console.WriteLine("Snake");
+                            }
+                        }
+                        Console.WriteLine(secondPlayerPosition);
+                        Console.WriteLine(playerTwodiceCount);
+                    }
+                }
+
 
 
             }
